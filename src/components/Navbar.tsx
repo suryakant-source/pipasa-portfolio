@@ -1,25 +1,67 @@
-import Link from "next/link";
-import { Logo } from "./Logo";
+"use client";
 
-export function Navbar() {
+import React, { useState } from "react";
+import { content } from "@/content";
+
+export default function Navbar() {
+  const [veilActive, setVeilActive] = useState(false);
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (href === "#contact") {
+      e.preventDefault();
+      setVeilActive(true);
+      setTimeout(() => {
+        const el = document.querySelector("#contact");
+        if (el) {
+          el.scrollIntoView({ behavior: "auto" });
+        }
+        setTimeout(() => {
+          setVeilActive(false);
+        }, 300);
+      }, 550);
+    }
+  };
+
   return (
-    <header className="w-full border-b border-[#1A1A1A]/10 bg-[#F6F2EA]">
-      <div className="mx-auto flex w-full max-w-[680px] items-center justify-between px-5 sm:px-6 py-5 sm:py-8">
-        <Link
-          href="/"
-          className="focus:outline-none"
-          aria-label="Sadhna Circle"
-        >
-          <Logo />
-        </Link>
+    <>
+      {/* Paper-coloured veil for smooth contact transition */}
+      <div
+        className={`fixed inset-0 z-50 bg-[#f4f1eb] pointer-events-none transition-opacity duration-550 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+          veilActive ? "opacity-100" : "opacity-0"
+        }`}
+      />
 
-        <Link
-          href="#apply"
-          className="text-sm font-medium tracking-normal text-[#D9822B] hover:underline underline-offset-4"
+      <header className="fixed top-0 left-0 right-0 z-40 w-full px-6 md:px-12 py-7 flex items-center justify-between pointer-events-auto bg-transparent">
+        {/* Logo Left */}
+        <a
+          href="#"
+          className="group flex items-center gap-2 text-inherit tracking-tight transition-transform duration-300 ease-out active:scale-95"
         >
-          Apply &rarr;
-        </Link>
-      </div>
-    </header>
+          <span className="font-serif text-xl md:text-2xl font-light text-[#1b1815] group-hover:opacity-85 transition-opacity">
+            {content.navigation.logoText}
+          </span>
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#1c3a94] transform translate-y-0.5" />
+        </a>
+
+        {/* Right Mono Nav Links */}
+        <nav className="flex items-center gap-7 md:gap-10">
+          {content.navigation.links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="group relative py-1 text-[11px] font-mono tracking-[0.18em] uppercase text-[#1b1815] transition-colors hover:text-[#1c3a94]"
+            >
+              <span>{link.label}</span>
+              {/* Hairline underline scaling from left */}
+              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#1c3a94] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+            </a>
+          ))}
+        </nav>
+      </header>
+    </>
   );
 }

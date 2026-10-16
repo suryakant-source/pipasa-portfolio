@@ -1,82 +1,49 @@
 import type { Metadata, Viewport } from "next";
-import { Newsreader, Inter } from "next/font/google";
+import { Newsreader, The_Nautigal, Bricolage_Grotesque, DM_Mono } from "next/font/google";
 import "./globals.css";
+import { content } from "@/content";
 
 const newsreader = Newsreader({
-  variable: "--font-serif",
+  variable: "--font-newsreader",
   subsets: ["latin"],
   style: ["normal", "italic"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-sans",
+const nautigal = The_Nautigal({
+  variable: "--font-nautigal",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
 export const viewport: Viewport = {
-  themeColor: "#F6F2EA",
+  themeColor: "#f4f1eb",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  title: "Sadhna Circle | Identity-Blind Builder Syndicate",
-  description:
-    "A seven-day, identity-blind builder circle for 36 engineering and business students. Real problems, verifiable evidence, and founder introductions for top builders.",
-  keywords: [
-    "Sadhna Circle",
-    "builder syndicate",
-    "identity-blind",
-    "engineering students",
-    "business students",
-    "proof of work",
-    "founder access",
-    "cohort 1",
-  ],
-  authors: [{ name: "Sadhna Circle" }],
-  creator: "Sadhna Circle",
-  metadataBase: new URL("https://sadhna-circle.netlify.app"),
-  alternates: {
-    canonical: "https://sadhna-circle.netlify.app",
-  },
-  openGraph: {
-    title: "Sadhna Circle | Prove what you can build. Not where you studied.",
-    description:
-      "A seven-day, identity-blind builder circle for 36 engineering and business students. Real problems, verifiable evidence, and founder introductions for top builders.",
-    url: "https://sadhna-circle.netlify.app",
-    siteName: "Sadhna Circle",
-    locale: "en_US",
-    type: "website",
-    images: [
-      {
-        url: "https://sadhna-circle.netlify.app/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Sadhna Circle",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Sadhna Circle | Prove what you can build. Not where you studied.",
-    description:
-      "A seven-day, identity-blind builder circle for 36 engineering and business students. Real problems, verifiable evidence, and founder introductions for top builders.",
-    creator: "@suryakant_notes",
-    images: ["https://sadhna-circle.netlify.app/og-image.png"],
-  },
+  title: content.meta.title,
+  description: content.meta.description,
+  metadataBase: new URL("https://pipasa.portfolio.website"),
   icons: {
     icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
-  },
-  robots: {
-    index: true,
-    follow: true,
   },
 };
 
@@ -88,9 +55,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${inter.variable} scroll-smooth`}
+      className={`${newsreader.variable} ${nautigal.variable} ${bricolage.variable} ${dmMono.variable}`}
     >
-      <body className="min-h-screen bg-[#F6F2EA] text-[#1A1A1A] antialiased">
+      <body className="min-h-screen bg-[#f4f1eb] text-[#1b1815] font-serif antialiased selection:bg-[#1c3a94] selection:text-white overflow-x-hidden">
         {children}
       </body>
     </html>

@@ -2,10 +2,20 @@
 
 @layer base {
   :root {
-    --background: #F6F2EA;
-    --foreground: #1A1A1A;
-    --accent: #D9822B;
-    --rule: rgba(26, 26, 26, 0.12);
+    --paper: #f4f1eb;
+    --paper-light: #f8f6f2;
+    --ink: #1b1815;
+    --ink-soft: #5d564e;
+    --ink-faint: #726a60;
+    --hairline: rgba(27, 24, 21, 0.12);
+    --cobalt: #1c3a94;
+    --cobalt-deep: #142c74;
+    --status-green: #4a9f6e;
+
+    --font-serif: var(--font-newsreader), Georgia, serif;
+    --font-script: var(--font-nautigal), cursive;
+    --font-grotesk: var(--font-bricolage), sans-serif;
+    --font-mono: var(--font-dm-mono), monospace;
   }
 
   * {
@@ -17,10 +27,10 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #F6F2EA;
+    background-color: var(--paper);
+    color: var(--ink);
     overflow-x: hidden;
     width: 100%;
-    max-width: 100%;
     margin: 0;
     padding: 0;
   }
@@ -29,70 +39,149 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    max-width: 100%;
-    background-color: #F6F2EA;
-    color: #1A1A1A;
-    font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 17px;
-    line-height: 1.6;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-weight: 300;
+    letter-spacing: -0.015em;
     overflow-x: hidden;
-    min-height: 100vh;
   }
 
   ::selection {
-    background-color: #D9822B;
+    background-color: #1c3a94;
     color: #ffffff;
   }
+}
 
-  h1, h2, h3, h4 {
-    font-family: var(--font-serif), Georgia, "Times New Roman", serif;
-    font-weight: 400;
-    color: #1A1A1A;
-    letter-spacing: -0.015em;
+/* Custom font utility classes */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+.font-grotesk {
+  font-family: var(--font-grotesk);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Specific editorial typography specs */
+.serif-display {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.032em;
+  line-height: 1.02;
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.17em;
+}
+
+/* Paper noise texture overlay */
+.paper-noise-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.14'/%3E%3C/svg%3E");
+}
+
+/* Smooth subtle transitions */
+.ease-expo {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Keyframe animations */
+@keyframes lanyardSway {
+  0% {
+    transform: rotate(-1.6deg);
+  }
+  100% {
+    transform: rotate(1.6deg);
+  }
+}
+
+@keyframes clipRock {
+  0% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes pulseGreen {
+  0% {
+    transform: scale(0.45);
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes scrollSlide {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes subtleShimmer {
+  0% {
+    transform: translateX(-100%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(200%) rotate(25deg);
+  }
+}
+
+.animate-lanyard {
+  animation: lanyardSway 9s ease-in-out infinite alternate;
+  transform-origin: top center;
+}
+
+.animate-clip-rock {
+  animation: clipRock 3.1s ease-in-out infinite alternate;
+  transform-origin: center top;
+}
+
+.animate-status-ring {
+  animation: pulseGreen 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.animate-scroll-bar {
+  animation: scrollSlide 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Reduced motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 
-  a {
-    transition: color 0.15s ease, text-decoration 0.15s ease;
+  .animate-lanyard,
+  .animate-clip-rock,
+  .animate-status-ring,
+  .animate-scroll-bar {
+    animation: none !important;
   }
-
-  :focus-visible {
-    outline: 2px solid #D9822B;
-    outline-offset: 2px;
-  }
-}
-
-/* Plain editorial link style */
-.editorial-link {
-  color: #D9822B;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-}
-
-.editorial-link:hover {
-  color: #B56518;
-}
-
-/* Clean underlined form inputs */
-.editorial-input {
-  width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(26, 26, 26, 0.25);
-  border-radius: 0;
-  padding: 8px 0;
-  color: #1A1A1A;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  outline: none;
-  transition: border-color 0.15s ease;
-}
-
-.editorial-input:focus {
-  border-bottom-color: #D9822B;
-}
-
-.editorial-input::placeholder {
-  color: rgba(26, 26, 26, 0.4);
 }
