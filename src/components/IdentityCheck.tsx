@@ -233,19 +233,20 @@ export default function IdentityCheck() {
               </div>
 
               {/* Photo representation in scanner */}
-              <div className="my-3 relative w-full h-[140px] sm:h-[170px] rounded-[10px] overflow-hidden bg-gradient-to-b from-[#e8e2d5] to-[#d6cebf] border border-white/80 flex flex-col items-center justify-center text-center">
-                <div className="w-14 h-14 rounded-full bg-white/85 shadow-sm flex items-center justify-center text-[#1c3a94] mb-1">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                </div>
-                <span className="font-mono text-[8.5px] tracking-[0.16em] uppercase text-[#5d564e]">
-                  {content.hero.badge.name}
-                </span>
-                <span className="font-serif italic text-[10px] text-[#726a60]">
-                  Biometric Specimen Verified
-                </span>
+              <div className="my-3 relative w-full h-[145px] sm:h-[175px] rounded-[10px] overflow-hidden bg-[#ebe5da] border border-white/80 shadow-inner flex items-center justify-center">
+                {content.hero.badge.photo ? (
+                  <img
+                    src={content.hero.badge.photo}
+                    alt={content.hero.badge.name}
+                    className="w-full h-full object-cover object-[center_16%]"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center text-center p-3">
+                    <span className="font-mono text-[8.5px] tracking-[0.16em] uppercase text-[#5d564e]">
+                      {content.hero.badge.name}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="text-left mt-2">

@@ -68,6 +68,7 @@ export interface ContentData {
     name: string;
     rolePrefix: string;
     role: string;
+    tagline: string;
     bio: string;
     primaryCta: {
       label: string;
@@ -144,11 +145,11 @@ export interface ContentData {
 
 export const content: ContentData = {
   meta: {
-    title: "Pipasa [placeholder] — Content Creator & Creative Strategist",
+    title: "Pipasa — Social Media Manager & Content Creator",
     description:
-      "Official portfolio of Pipasa [placeholder]. High-retention short-form video storytelling, brand campaigns, and creative strategy for modern brands.",
+      "I plan, shoot and edit content that makes brands easy to remember and easy to say yes to. Reels, stories, captions, and the community behind them.",
     siteUrl: "https://pipasa.portfolio.website [placeholder]",
-    author: "Pipasa [placeholder]",
+    author: "Pipasa",
   },
 
   navigation: {
@@ -162,7 +163,7 @@ export const content: ContentData = {
 
   loader: {
     scriptName: "Pipasa",
-    role: "content creator & strategist [placeholder]",
+    role: "social media manager & content creator",
     footerNote: "Portfolio, 2026",
   },
 
@@ -172,11 +173,12 @@ export const content: ContentData = {
     nameLead: "I'm ",
     name: "Pipasa,",
     rolePrefix: "a ",
-    role: "content creator & strategist.",
-    bio: "Crafting editorial short-form reels, cultural narratives, and viral visual stories that turn casual scrollers into loyal brand communities [placeholder].",
+    role: "social media manager & content creator.",
+    tagline: "I turn scrolls into customers.",
+    bio: "I plan, shoot and edit content that makes brands easy to remember and easy to say yes to. Reels, stories, captions, and the community behind them.",
     primaryCta: {
-      label: "START A PROJECT",
-      href: "#contact",
+      label: "MESSAGE ON WHATSAPP",
+      href: "https://wa.me/916371151811",
     },
     secondaryCta: {
       label: "ABOUT PIPASA",
@@ -186,9 +188,9 @@ export const content: ContentData = {
       serial: "No 0001",
       passType: "Studio pass - 2026",
       status: "Available for work",
-      name: "Pipasa [placeholder]",
-      role: "CREATOR & STRATEGIST",
-      photo: "/placeholder-portrait.jpg",
+      name: "Pipasa",
+      role: "SOCIAL MEDIA MANAGER & CREATOR",
+      photo: "/pipasa.png",
       nfcLabel: "NFC 2.4GHz",
       brandMark: "PIPASA STUDIO",
     },
@@ -210,19 +212,19 @@ export const content: ContentData = {
     headingFirstPart: "Identity",
     headingAccentWord: "Verified.",
     paragraph:
-      "Operating at the intersection of cultural taste and platform dynamics. Every piece is engineered with rhythmic pacing, organic product integration, and genuine visual charm [placeholder].",
+      "I turn scrolls into customers. Operating at the intersection of cultural taste and platform dynamics. Every piece is engineered with rhythmic pacing, organic product integration, and genuine visual charm [placeholder].",
     stampText: "VERIFIED CREATOR • 2026 • OFFICIAL STUDIO PASS • ",
     cta: {
       label: "EXPLORE SELECTED WORK",
       href: "#work",
     },
     facts: [
-      { label: "NAME", value: "Pipasa [placeholder]", icon: "user" },
-      { label: "ROLE", value: "Visual Creator & Strategist [placeholder]", icon: "film" },
-      { label: "LOCATION", value: "Mumbai, India [placeholder]", icon: "map-pin" },
-      { label: "EXPERIENCE", value: "4+ Years [placeholder]", icon: "clock" },
-      { label: "SPECIALITY", value: "Reels & Aesthetic Storytelling [placeholder]", icon: "sparkles" },
-      { label: "CURRENTLY", value: "Open for Q2/Q3 Brand Collaborations [placeholder]", icon: "radio" },
+      { label: "NAME", value: "Pipasa", icon: "user" },
+      { label: "ROLE", value: "Social Media Manager & Content Creator", icon: "film" },
+      { label: "LOCATION", value: "India [placeholder]", icon: "map-pin" },
+      { label: "EXPERIENCE", value: "[placeholder]", icon: "clock" },
+      { label: "SPECIALITY", value: "Reels, Stories, Captions & Community", icon: "sparkles" },
+      { label: "CURRENTLY", value: "Available for Projects & Retainers", icon: "radio" },
     ],
   },
 
@@ -242,14 +244,14 @@ export const content: ContentData = {
         bgColor: "#f7f1e8",
         accentColor: "#b87d4b",
         platform: "Instagram Reel",
-        metric: "1.4M views [placeholder]",
-        secondaryMetric: "142K saves [placeholder]",
+        metric: "[placeholder]",
+        secondaryMetric: "[placeholder]",
         quoteItalic: "cinematic framing meets quiet contemplation",
         description:
           "An intimate after-dark narrative exploring urban solitude with anamorphic lens textures and organic soundscapes [placeholder].",
-        tags: ["Cinematic", "4K Video", "Sound Design", "Lifestyle"],
+        tags: ["Reels", "Visual Poetry", "Captions", "Audio Design"],
         coverImage: "/work-1.jpg",
-        linkUrl: "https://instagram.com/reel/[placeholder-1]",
+        linkUrl: "https://www.instagram.com/pipashha/",
       },
       {
         id: "reel-02",
@@ -260,14 +262,14 @@ export const content: ContentData = {
         bgColor: "#e3eae3",
         accentColor: "#416c4f",
         platform: "Brand Campaign",
-        metric: "890K views [placeholder]",
-        secondaryMetric: "19.2% share rate [placeholder]",
+        metric: "[placeholder]",
+        secondaryMetric: "[placeholder]",
         quoteItalic: "seamless daily ritual integration",
         description:
-          "Four-part organic living series spotlighting clean herbal formulations, driving a 3.8x surge in brand profile visits [placeholder].",
-        tags: ["Product Storytelling", "Color Grading", "Aesthetic"],
+          "Four-part organic living series spotlighting clean herbal formulations, driving repeat engagement across stories and reels [placeholder].",
+        tags: ["Product Storytelling", "Brand Aesthetic", "Retention"],
         coverImage: "/work-2.jpg",
-        linkUrl: "https://instagram.com/reel/[placeholder-2]",
+        linkUrl: "https://www.instagram.com/pipashha/",
       },
       {
         id: "reel-03",
@@ -278,14 +280,14 @@ export const content: ContentData = {
         bgColor: "#e1e7f5",
         accentColor: "#1c3a94",
         platform: "Fashion Editorial",
-        metric: "2.1M views [placeholder]",
-        secondaryMetric: "320K likes [placeholder]",
+        metric: "[placeholder]",
+        secondaryMetric: "[placeholder]",
         quoteItalic: "kinetic cuts synced to tempo",
         description:
-          "High-cadence transition reel crafted for contemporary Indian streetwear, balancing raw street energy with editorial precision [placeholder].",
-        tags: ["Fashion Film", "Beat Matching", "Audio Architecture"],
+          "High-cadence transition reel crafted for contemporary streetwear, balancing raw street energy with editorial precision [placeholder].",
+        tags: ["Pacing", "Beat Matching", "Community Growth"],
         coverImage: "/work-3.jpg",
-        linkUrl: "https://instagram.com/reel/[placeholder-3]",
+        linkUrl: "https://www.instagram.com/pipashha/",
       },
       {
         id: "reel-04",
@@ -296,14 +298,14 @@ export const content: ContentData = {
         bgColor: "#fceee5",
         accentColor: "#bc5a32",
         platform: "Beauty Partnership",
-        metric: "1.7M views [placeholder]",
-        secondaryMetric: "94K saves [placeholder]",
+        metric: "[placeholder]",
+        secondaryMetric: "[placeholder]",
         quoteItalic: "unfiltered macro textures in natural light",
         description:
-          "Zero-filter direct sun demonstration highlighting radiant finish, generating the brand's top-converting seasonal asset [placeholder].",
-        tags: ["Beauty", "Natural Lighting", "UGC Conversion"],
+          "Zero-filter direct sun demonstration highlighting radiant finish, creating high-intent conversations in the comment section [placeholder].",
+        tags: ["UGC Direct", "Conversion", "Authenticity"],
         coverImage: "/work-4.jpg",
-        linkUrl: "https://instagram.com/reel/[placeholder-4]",
+        linkUrl: "https://www.instagram.com/pipashha/",
       },
     ],
   },
@@ -317,10 +319,10 @@ export const content: ContentData = {
       {
         tab: "First",
         verb: "DISCOVER",
-        italicPhrase: "unearthing the core tension",
+        italicPhrase: "unearthing the core brand tension",
         description:
           "Deconstructing audience psyche, trending cultural motifs, and sonic timing before filming a single frame [placeholder].",
-        tags: ["Trend Research", "Creative Angle", "Hook Strategy"],
+        tags: ["Strategy", "Hooks", "Audience Psyche"],
         bgColor: "#f8f5ee",
         tabAlign: "left",
       },
@@ -340,7 +342,7 @@ export const content: ContentData = {
         italicPhrase: "deliberate tactile aesthetics",
         description:
           "Capturing cinematic natural light, rich Foley sound stems, and genuine human presence that cuts through algorithmic noise [placeholder].",
-        tags: ["Direction", "Lighting Design", "Audio Capture"],
+        tags: ["Shooting", "Editing", "Color & Audio"],
         bgColor: "#e1e7f2",
         tabAlign: "right-center",
       },
@@ -360,31 +362,31 @@ export const content: ContentData = {
   contact: {
     badgeTitle: "CONTACT No 0001",
     name: "PIPASA",
-    role: "CREATOR • STRATEGIST • COLLABORATOR",
-    headline: "Let's Build Something",
-    highlight: "Beautiful.",
+    role: "SOCIAL MEDIA MANAGER • CREATOR",
+    headline: "Have a brand that needs to be seen?",
+    highlight: "Let's talk.",
     subtext:
-      "Available for selected brand campaigns, visual directing, and creative retainers for 2026. Reach out directly below [placeholder].",
+      "I plan, shoot and edit content that makes brands easy to remember and easy to say yes to. Reach out directly below.",
     email: "hello.pipasa@studio.in [placeholder]",
     copiedNotice: "Email copied to clipboard!",
-    qrPrompt: "Scan to connect instantly",
+    qrPrompt: "Scan to connect on WhatsApp",
     socials: [
       {
-        label: "INSTAGRAM",
-        value: "@pipasa [placeholder]",
-        href: "https://instagram.com/[placeholder]",
-        icon: "instagram",
-      },
-      {
         label: "WHATSAPP",
-        value: "+91 98765 43210 [placeholder]",
-        href: "https://wa.me/919876543210?text=Hi%20Pipasa [placeholder]",
+        value: "+91 63711 51811",
+        href: "https://wa.me/916371151811",
         icon: "message-circle",
       },
       {
+        label: "INSTAGRAM",
+        value: "@pipashha",
+        href: "https://www.instagram.com/pipashha/",
+        icon: "instagram",
+      },
+      {
         label: "MEDIA KIT",
-        value: "Download 2026 Kit (PDF) [placeholder]",
-        href: "#download-kit [placeholder]",
+        value: "Download Media Kit (PDF) [placeholder]",
+        href: "#download-kit",
         icon: "download",
       },
     ],

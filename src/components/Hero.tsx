@@ -97,6 +97,18 @@ export default function Hero({ isLoaded }: HeroProps) {
             </span>
           </h1>
 
+          {/* Tagline */}
+          <div
+            className="font-serif italic text-[17px] sm:text-xl text-[#1c3a94] font-normal -mt-2 mb-4 transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{
+              opacity: revealed ? 1 : 0,
+              transform: revealed ? "translateY(0)" : "translateY(24px)",
+              transitionDelay: "420ms",
+            }}
+          >
+            &ldquo;{content.hero.tagline}&rdquo;
+          </div>
+
           {/* Paragraph in serif ~18-20px, soft ink, max ~34ch */}
           <p
             className="font-serif font-light text-[#5d564e] text-base sm:text-lg md:text-[19.5px] leading-[1.48] max-w-[34ch] mb-6 sm:mb-9 transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -118,9 +130,11 @@ export default function Hero({ isLoaded }: HeroProps) {
               transitionDelay: "600ms",
             }}
           >
-            {/* Primary Filled Cobalt Pill: START A PROJECT */}
+            {/* Primary Filled Cobalt Pill: MESSAGE ON WHATSAPP */}
             <a
               href={content.hero.primaryCta.href}
+              target={content.hero.primaryCta.href.startsWith("http") ? "_blank" : undefined}
+              rel={content.hero.primaryCta.href.startsWith("http") ? "noopener noreferrer" : undefined}
               className="group inline-flex items-center gap-3 px-5 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[#1c3a94] hover:bg-[#142c74] text-white font-mono text-[10.5px] sm:text-[11.5px] tracking-[0.18em] uppercase transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-[0_4px_14px_rgba(28,58,148,0.25)] hover:shadow-[0_6px_20px_rgba(28,58,148,0.35)] active:scale-[0.98]"
             >
               <span>{content.hero.primaryCta.label}</span>

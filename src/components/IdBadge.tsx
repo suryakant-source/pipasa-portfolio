@@ -154,33 +154,24 @@ export default function IdBadge({ isLoaded = true }: IdBadgeProps) {
             </div>
           </div>
 
-          {/* Portrait Photo Area (Placeholder) */}
-          <div className="my-2.5 md:my-4 relative w-full h-[135px] sm:h-[185px] md:h-[240px] rounded-[10px] md:rounded-[12px] overflow-hidden bg-gradient-to-b from-[#ebe5da] via-[#dfd8ca] to-[#d3ccbd] border border-white/70 shadow-inner flex flex-col items-center justify-center text-center p-3">
-            <div className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-white/75 border border-white shadow-sm flex items-center justify-center text-[#1c3a94] mb-1.5 md:mb-2">
-              <svg
-                width="24"
-                height="24"
-                className="md:w-9 md:h-9"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </div>
-            <span className="font-mono text-[8px] md:text-[10px] tracking-[0.16em] uppercase text-[#5d564e] font-medium">
-              [Photo Placeholder]
-            </span>
-            <span className="font-serif italic text-[10px] md:text-xs text-[#726a60]">
-              Pipasa • Portrait
-            </span>
+          {/* Portrait Photo Area */}
+          <div className="my-2.5 md:my-4 relative w-full h-[145px] sm:h-[195px] md:h-[250px] rounded-[10px] md:rounded-[12px] overflow-hidden bg-[#ebe5da] border border-white/80 shadow-inner flex items-center justify-center">
+            {content.hero.badge.photo ? (
+              <img
+                src={content.hero.badge.photo}
+                alt={content.hero.badge.name}
+                className="w-full h-full object-cover object-[center_16%]"
+              />
+            ) : (
+              <div className="flex flex-col items-center justify-center text-center p-3">
+                <span className="font-mono text-[8px] md:text-[10px] tracking-[0.16em] uppercase text-[#5d564e] font-medium">
+                  [Photo Placeholder]
+                </span>
+              </div>
+            )}
 
             {/* Subtle frosted tag overlay in corner */}
-            <div className="absolute bottom-2 left-2 px-1.5 py-0.5 md:px-2 md:py-1 rounded bg-black/40 backdrop-blur-md text-white font-mono text-[7px] md:text-[8px] tracking-[0.16em]">
+            <div className="absolute bottom-2 left-2 px-1.5 py-0.5 md:px-2 md:py-1 rounded bg-black/50 backdrop-blur-md text-white font-mono text-[7px] md:text-[8px] tracking-[0.16em]">
               OFFICIAL CREATOR
             </div>
           </div>
