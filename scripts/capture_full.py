@@ -53,10 +53,24 @@ with sync_playwright() as p:
 
     # 2. Desktop Identity Check (About - inside pinned scan)
     page.evaluate('window.__lenis ? window.__lenis.scrollTo("#about", { immediate: true }) : document.getElementById("about").scrollIntoView({ behavior: "instant" })')
-    time.sleep(2.5)
+    time.sleep(2.0)
     p2 = os.path.join(SCREENSHOTS_DIR, "about-desktop-1440.png")
     page.screenshot(path=p2)
     shutil.copy(p2, os.path.join(ARTIFACTS_DIR, "about-desktop-1440.png"))
+
+    # 2b. Identity Check Scanning (progress ~45%)
+    page.evaluate('window.scrollBy(0, 1100)')
+    time.sleep(1.5)
+    p2_scan = os.path.join(SCREENSHOTS_DIR, "about-desktop-scanning-1440.png")
+    page.screenshot(path=p2_scan)
+    shutil.copy(p2_scan, os.path.join(ARTIFACTS_DIR, "about-desktop-scanning-1440.png"))
+
+    # 2c. Identity Check Verified (progress ~90%)
+    page.evaluate('window.scrollBy(0, 1000)')
+    time.sleep(1.5)
+    p2_ver = os.path.join(SCREENSHOTS_DIR, "about-desktop-verified-1440.png")
+    page.screenshot(path=p2_ver)
+    shutil.copy(p2_ver, os.path.join(ARTIFACTS_DIR, "about-desktop-verified-1440.png"))
 
     # 3. Desktop Selected Work (Reels 3D Carousel)
     page.evaluate('window.__lenis ? window.__lenis.scrollTo("#work", { immediate: true }) : document.getElementById("work").scrollIntoView({ behavior: "instant" })')
@@ -110,6 +124,13 @@ with sync_playwright() as p:
     pm2 = os.path.join(SCREENSHOTS_DIR, "work-mobile-390.png")
     mobile_page.screenshot(path=pm2)
     shutil.copy(pm2, os.path.join(ARTIFACTS_DIR, "work-mobile-390.png"))
+
+    # Mobile Process
+    mobile_page.evaluate('document.getElementById("process").scrollIntoView({ behavior: "instant" })')
+    time.sleep(2.0)
+    pm_proc = os.path.join(SCREENSHOTS_DIR, "process-mobile-390.png")
+    mobile_page.screenshot(path=pm_proc)
+    shutil.copy(pm_proc, os.path.join(ARTIFACTS_DIR, "process-mobile-390.png"))
 
     # Mobile Contact
     mobile_page.evaluate('document.getElementById("contact").scrollIntoView({ behavior: "instant" })')

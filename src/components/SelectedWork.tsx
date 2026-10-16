@@ -91,15 +91,22 @@ export default function SelectedWork() {
       aria-label="Selected work section"
       className="relative min-h-[100svh] w-full flex flex-col justify-between py-16 md:py-20 px-4 sm:px-8 md:px-14 overflow-hidden z-20 border-t border-[rgba(27,24,21,0.08)] bg-[#f4f1eb]"
     >
-      {/* Dynamic Background Room lighting per active card */}
+      {/* Dynamic Background Room lighting & Concentric Arc line-art per active card */}
       <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-1000 ease-out z-0"
+        className="pointer-events-none absolute inset-0 transition-opacity duration-1000 ease-out z-0 overflow-hidden select-none"
         style={{
           background: `radial-gradient(ellipse at ${
             35 + activeIndex * 15
           }% 40%, rgba(255, 255, 255, 0.7) 0%, rgba(244, 241, 235, 0) 70%)`,
         }}
-      />
+      >
+        <svg className="absolute -top-40 right-0 w-[1000px] h-[1000px] opacity-35 text-[#1b1815]" viewBox="0 0 1000 1000" fill="none">
+          <circle cx="800" cy="200" r="300" stroke="currentColor" strokeWidth="1" strokeOpacity="0.08" />
+          <circle cx="800" cy="200" r="500" stroke="currentColor" strokeWidth="1" strokeOpacity="0.06" strokeDasharray="5 7" />
+          <circle cx="800" cy="200" r="750" stroke="currentColor" strokeWidth="1" strokeOpacity="0.04" />
+        </svg>
+        <div className="absolute inset-0 paper-noise-pattern opacity-50" />
+      </div>
 
       {/* Header Centred */}
       <div className="relative z-10 w-full max-w-[800px] mx-auto text-center pt-2 pb-6">

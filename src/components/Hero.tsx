@@ -23,7 +23,7 @@ export default function Hero({ isLoaded }: HeroProps) {
     <section
       id="hero"
       aria-label="Hero section"
-      className="relative min-h-[100svh] w-full flex flex-col justify-between pt-20 sm:pt-24 lg:pt-28 pb-8 sm:pb-10 px-5 sm:px-8 md:px-14 lg:px-20 overflow-hidden z-10"
+      className="relative min-h-[100svh] w-full flex flex-col justify-between pt-20 sm:pt-24 lg:pt-28 pb-8 sm:pb-10 px-6 md:px-12 overflow-hidden z-10"
     >
       {/* Two columns on desktop: Text Left, ID Badge Right */}
       <div className="w-full max-w-[1440px] mx-auto my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
@@ -36,8 +36,8 @@ export default function Hero({ isLoaded }: HeroProps) {
           />
         </div>
 
-        {/* Text Left Column: Desktop text left padding 48px */}
-        <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col items-start lg:pl-12 text-left">
+        {/* Text Left Column: Flush with nav logo */}
+        <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col items-start text-left">
           {/* Eyebrow with 32px hairline */}
           <div
             className="flex items-center gap-3 mb-4 sm:mb-6 transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -73,9 +73,9 @@ export default function Hero({ isLoaded }: HeroProps) {
               {content.hero.greeting}
             </span>
 
-            {/* Line 2: The Nautigal Script, Cobalt, Bigger */}
+            {/* Line 2: The Nautigal Script, Cobalt, Bigger with clean breathing room */}
             <span
-              className="font-script font-normal text-[#1c3a94] text-[48px] sm:text-[62px] md:text-[clamp(4.25rem,10vw,8.5rem)] leading-[0.88] -my-1 sm:-my-2 transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+              className="font-script font-normal text-[#1c3a94] text-[48px] sm:text-[62px] md:text-[clamp(4.25rem,10vw,8.5rem)] leading-[1.08] my-1 sm:my-2 pb-1 transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
               style={{
                 opacity: revealed ? 1 : 0,
                 transform: revealed ? "translateY(0)" : "translateY(24px)",
@@ -88,7 +88,7 @@ export default function Hero({ isLoaded }: HeroProps) {
 
             {/* Line 3: Serif light italic */}
             <span
-              className="font-serif italic font-light text-[#5d564e] text-[24px] sm:text-[30px] md:text-[clamp(2.25rem,5vw,4.75rem)] leading-[1.04] transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+              className="font-serif italic font-light text-[#5d564e] text-[24px] sm:text-[30px] md:text-[clamp(2.25rem,5vw,4.75rem)] leading-[1.04] mt-1 transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
               style={{
                 opacity: revealed ? 1 : 0,
                 transform: revealed ? "translateY(0)" : "translateY(24px)",

@@ -165,9 +165,19 @@ export default function Process() {
                 {step.description}
               </p>
 
-              {/* Bottom Line of 3 Tags Separated by Faint Slashes */}
-              <div className="mt-auto pt-4 border-t border-[rgba(27,24,21,0.08)] flex items-center font-mono text-[9px] sm:text-[9.5px] tracking-[0.14em] text-[#726a60] uppercase">
-                {step.tags.join(" / ")}
+              {/* "What comes of it:" tag row */}
+              <div className="mt-auto pt-4 border-t border-[rgba(27,24,21,0.08)] flex flex-col gap-1.5">
+                <span className="font-mono text-[8px] sm:text-[8.5px] tracking-[0.16em] uppercase text-[#726a60]">
+                  What comes of it:
+                </span>
+                <div className="flex flex-wrap items-center gap-1.5 font-mono text-[9px] sm:text-[9.5px] tracking-[0.14em] text-[#1c3a94] uppercase font-medium">
+                  {step.tags.map((tag, tIdx) => (
+                    <span key={tag} className="inline-flex items-center gap-1.5">
+                      <span>{tag}</span>
+                      {tIdx < step.tags.length - 1 && <span className="text-[rgba(27,24,21,0.2)]">/</span>}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           ))}

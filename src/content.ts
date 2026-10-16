@@ -168,7 +168,7 @@ export const content: ContentData = {
   },
 
   hero: {
-    eyebrow: "-- PORTFOLIO / 2026",
+    eyebrow: "PORTFOLIO / 2026",
     greeting: "Hello,",
     nameLead: "I'm ",
     name: "Pipasa,",

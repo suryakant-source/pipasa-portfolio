@@ -24,20 +24,23 @@ export default function Home() {
         {/* Fixed Background Room: Window Light, Leaf Shadow, Concentric Arcs, Noise */}
         <BackgroundRoom />
 
-        {/* Transparent Top Navigation with Paper Veil Transition */}
+        {/* Transparent Top Navigation with Paper Veil Transition (z-40) */}
         <Navbar />
 
-        {/* Single Persistent Interactive Lanyard Badge across entire journey */}
-        <InteractiveLanyardBadge />
+        {/* Hero & About Pinned Stage Wrapper (z-20, below Navbar z-40 and below Work z-30) */}
+        <div id="hero-about-stage" className="relative z-20 w-full">
+          {/* Interactive Lanyard Badge for Hero and Identity Check */}
+          <InteractiveLanyardBadge />
 
-        {/* Main Sections Flow */}
-        <main className="relative z-10 w-full flex flex-col">
           {/* Section 00: Hero + Signature Lanyard ID Badge */}
           <Hero isLoaded={isLoaded} />
 
-          {/* Section 01: Identity Check (About Scanner) */}
+          {/* Section 01: Identity Check (About Scanner - Pinned for 2500px) */}
           <IdentityCheck />
+        </div>
 
+        {/* Main Subsequent Sections Flow (z-30, relative, scrolls cleanly over Hero & About stage) */}
+        <main className="relative z-30 w-full flex flex-col bg-[#f4f1eb]">
           {/* Section 02: Selected Work (3D Orbit Carousel / Mobile Snap List) */}
           <SelectedWork />
 

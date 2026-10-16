@@ -34,20 +34,21 @@ export default function IdentityCheck() {
     }
 
     const ctx = gsap.context(() => {
-      // Main Scrubbed Timeline pinned for 120svh of scroll
+      // Main Scrubbed Timeline pinned for 2500px of scroll
       const tl = gsap.timeline({
         scrollTrigger: {
+          id: "identity-check",
           trigger: container,
           start: "top top",
-          end: "+=120%",
+          end: "+=2500",
           pin: true,
           scrub: 0.6,
           onUpdate: (self) => {
             const p = self.progress;
-            // Scan beam progress 0 -> 100% between 0.1 and 0.6 of timeline
+            // Scan beam progress 0 -> 100% between 0.28 and 0.65 of timeline
             const beamP = Math.min(
               100,
-              Math.max(0, Math.round(((p - 0.08) / 0.52) * 100))
+              Math.max(0, Math.round(((p - 0.28) / 0.37) * 100))
             );
             setScanProgress(beamP);
             setIsVerified(beamP >= 98);
@@ -55,23 +56,23 @@ export default function IdentityCheck() {
         },
       });
 
-      // 1. Scanner beam sweep top to bottom
+      // 1. Scanner beam sweep top to bottom (during scan phase: 0.28 -> 0.65)
       if (scanBeamRef.current) {
         tl.fromTo(
           scanBeamRef.current,
           { top: "0%", opacity: 0 },
-          { top: "100%", opacity: 1, ease: "none", duration: 0.55 },
-          0.05
+          { top: "100%", opacity: 1, ease: "none", duration: 0.37 },
+          0.28
         );
       }
 
-      // 2. Right-hand panel fade & slide in earlier
+      // 2. Right-hand panel fade & slide in (reveals from 0.65 -> 0.85)
       if (rightPanelRef.current) {
         tl.fromTo(
           rightPanelRef.current,
-          { opacity: 0.2, y: 24 },
-          { opacity: 1, y: 0, ease: "power2.out", duration: 0.4 },
-          0.1
+          { opacity: 0.1, y: 24 },
+          { opacity: 1, y: 0, ease: "power2.out", duration: 0.22 },
+          0.65
         );
       }
 
@@ -81,8 +82,8 @@ export default function IdentityCheck() {
         tl.fromTo(
           validRules,
           { scaleX: 0, transformOrigin: "left center" },
-          { scaleX: 1, stagger: 0.04, ease: "power2.out", duration: 0.35 },
-          0.2
+          { scaleX: 1, stagger: 0.03, ease: "power2.out", duration: 0.2 },
+          0.68
         );
       }
 
@@ -91,8 +92,8 @@ export default function IdentityCheck() {
         tl.fromTo(
           stampRef.current,
           { scale: 1.4, opacity: 0, rotation: -24 },
-          { scale: 1, opacity: 1, rotation: -12, ease: "back.out(1.7)", duration: 0.35 },
-          0.55
+          { scale: 1, opacity: 1, rotation: -12, ease: "back.out(1.7)", duration: 0.2 },
+          0.76
         );
       }
 
@@ -105,8 +106,8 @@ export default function IdentityCheck() {
         });
         tl.to(
           stampCheckRef.current,
-          { strokeDashoffset: 0, duration: 0.25, ease: "power2.out" },
-          0.68
+          { strokeDashoffset: 0, duration: 0.16, ease: "power2.out" },
+          0.84
         );
       }
     }, container);
@@ -171,9 +172,19 @@ export default function IdentityCheck() {
       ref={containerRef}
       id="about"
       aria-label="Identity check section"
-      className="relative min-h-[100svh] w-full flex items-center justify-center py-16 md:py-24 px-5 sm:px-8 md:px-14 lg:px-20 overflow-hidden z-20 border-t border-[rgba(27,24,21,0.08)] bg-[#f8f6f2]/60 backdrop-blur-xs"
+      className="relative min-h-[100svh] w-full flex items-center justify-center py-16 md:py-24 px-5 sm:px-8 md:px-14 lg:px-20 overflow-hidden z-20 border-t border-[rgba(27,24,21,0.08)] bg-[#f8f6f2]"
     >
-      <div className="w-full max-w-[1360px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      {/* Background concentric arc line-art & paper grain texture */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
+        <svg className="absolute -top-32 -left-32 w-[900px] h-[900px] opacity-40 text-[#1b1815]" viewBox="0 0 900 900" fill="none">
+          <circle cx="450" cy="450" r="200" stroke="currentColor" strokeWidth="1" strokeOpacity="0.08" />
+          <circle cx="450" cy="450" r="320" stroke="currentColor" strokeWidth="1" strokeOpacity="0.06" strokeDasharray="4 6" />
+          <circle cx="450" cy="450" r="440" stroke="currentColor" strokeWidth="1" strokeOpacity="0.04" />
+        </svg>
+        <div className="absolute inset-0 paper-noise-pattern opacity-60" />
+      </div>
+
+      <div className="w-full max-w-[1360px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
         {/* Left-Centre Column: The Scanner Frame with ID Badge */}
         <div className="lg:col-span-5 flex justify-center">
           <div
