@@ -4,9 +4,12 @@ import React, { useState } from "react";
 import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import IdentityCheck from "@/components/IdentityCheck";
+import SelectedWork from "@/components/SelectedWork";
+import Process from "@/components/Process";
+import Contact from "@/components/Contact";
 import BackgroundRoom from "@/components/BackgroundRoom";
 import SmoothScroll from "@/components/SmoothScroll";
-import PlaceholderSections from "@/components/PlaceholderSections";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -20,16 +23,25 @@ export default function Home() {
         {/* Fixed Background Room: Window Light, Leaf Shadow, Concentric Arcs, Noise */}
         <BackgroundRoom />
 
-        {/* Transparent Top Navigation */}
+        {/* Transparent Top Navigation with Paper Veil Transition */}
         <Navbar />
 
-        {/* Main Content Area */}
+        {/* Main Sections Flow */}
         <main className="relative z-10 w-full flex flex-col">
-          {/* Hero Section with ID Badge on Lanyard */}
+          {/* Section 00: Hero + Signature Lanyard ID Badge */}
           <Hero isLoaded={isLoaded} />
 
-          {/* Phased Anchor Sections */}
-          <PlaceholderSections />
+          {/* Section 01: Identity Check (About Scanner) */}
+          <IdentityCheck />
+
+          {/* Section 02: Selected Work (3D Orbit Carousel / Mobile Snap List) */}
+          <SelectedWork />
+
+          {/* Section 03: Process ("How I work" Paper Folder Cards) */}
+          <Process />
+
+          {/* Section 04: Contact (Contact Pass Badge + Swoosh Underline) */}
+          <Contact />
         </main>
       </div>
     </SmoothScroll>
