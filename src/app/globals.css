@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #F6F2EA;
+    --foreground: #1A1A1A;
+    --accent: #D9822B;
+    --rule: rgba(26, 26, 26, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #F6F2EA;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    background-color: #F6F2EA;
+    color: #1A1A1A;
+    font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background-color: #D9822B;
+    color: #ffffff;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    color: #1A1A1A;
+    letter-spacing: -0.015em;
+  }
+
+  a {
+    transition: color 0.15s ease, text-decoration 0.15s ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid #D9822B;
+    outline-offset: 2px;
+  }
+}
+
+/* Plain editorial link style */
+.editorial-link {
+  color: #D9822B;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.editorial-link:hover {
+  color: #B56518;
+}
+
+/* Clean underlined form inputs */
+.editorial-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.25);
+  border-radius: 0;
+  padding: 8px 0;
+  color: #1A1A1A;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.editorial-input:focus {
+  border-bottom-color: #D9822B;
+}
+
+.editorial-input::placeholder {
+  color: rgba(26, 26, 26, 0.4);
+}
