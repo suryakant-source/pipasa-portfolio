@@ -10,6 +10,7 @@ import Process from "@/components/Process";
 import Contact from "@/components/Contact";
 import BackgroundRoom from "@/components/BackgroundRoom";
 import SmoothScroll from "@/components/SmoothScroll";
+import InteractiveLanyardBadge from "@/components/InteractiveLanyardBadge";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -25,6 +26,9 @@ export default function Home() {
 
         {/* Transparent Top Navigation with Paper Veil Transition */}
         <Navbar />
+
+        {/* Single Persistent Interactive Lanyard Badge across entire journey */}
+        <InteractiveLanyardBadge />
 
         {/* Main Sections Flow */}
         <main className="relative z-10 w-full flex flex-col">

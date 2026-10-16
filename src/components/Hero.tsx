@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { content } from "@/content";
-import IdBadge from "./IdBadge";
 
 interface HeroProps {
   isLoaded: boolean;
@@ -30,7 +29,11 @@ export default function Hero({ isLoaded }: HeroProps) {
       <div className="w-full max-w-[1440px] mx-auto my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
         {/* On mobile: Badge sits at top, partly cropped by top edge */}
         <div className="order-1 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end -mt-10 sm:-mt-6 lg:mt-0">
-          <IdBadge isLoaded={isLoaded} />
+          <div
+            id="badge-slot-hero"
+            className="w-[230px] sm:w-[280px] md:w-[330px] h-[340px] sm:h-[400px] md:h-[460px] pointer-events-none"
+            aria-hidden="true"
+          />
         </div>
 
         {/* Text Left Column: Desktop text left padding 48px */}

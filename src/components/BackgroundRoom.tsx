@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import DustParticles from "./DustParticles";
 
 export default function BackgroundRoom() {
   return (
@@ -10,6 +11,9 @@ export default function BackgroundRoom() {
     >
       {/* 1. Base Paper Color */}
       <div className="absolute inset-0 bg-[#f4f1eb]" />
+
+      {/* Floating Dust Particles Canvas */}
+      <DustParticles />
 
       {/* 2. Soft Skewed Window-Light Panes */}
       <div
@@ -27,8 +31,8 @@ export default function BackgroundRoom() {
         }}
       />
 
-      {/* 3. Blurred Olive-Branch Silhouette Leaf Shadow in Top Corner */}
-      <div className="absolute -top-10 -right-6 w-[340px] md:w-[480px] h-[360px] md:h-[500px] opacity-[0.14] pointer-events-none transform rotate-[16deg] filter blur-[3.5px]">
+      {/* 3. Soft Leaf-Shadow Layer (Olive Branch with Ambient Wind Sway) */}
+      <div className="absolute -top-10 -right-6 w-[340px] md:w-[480px] h-[360px] md:h-[500px] opacity-[0.14] pointer-events-none animate-leaf-sway filter blur-[3.5px]">
         <svg
           viewBox="0 0 400 400"
           fill="none"

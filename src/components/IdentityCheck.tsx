@@ -196,10 +196,13 @@ export default function IdentityCheck() {
               </span>
             </div>
 
-            {/* The Badge inside scanner */}
-            <div className="relative w-[240px] sm:w-[280px] md:w-[310px] rounded-[18px] p-4 sm:p-5 bg-white/80 border border-white/90 shadow-md overflow-hidden">
+            {/* The Scanner Slot for the single traveling badge */}
+            <div
+              id="badge-slot-scanner"
+              className="relative w-[240px] sm:w-[280px] md:w-[310px] h-[340px] sm:h-[390px] md:h-[440px] rounded-[18px] bg-white/20 border border-white/60 shadow-inner flex items-center justify-center overflow-hidden"
+            >
               {/* Left Edge Tiny Calibration Ticks */}
-              <div className="absolute top-10 left-1.5 flex flex-col gap-2 opacity-50 pointer-events-none">
+              <div className="absolute top-10 left-1.5 flex flex-col gap-2 opacity-60 pointer-events-none z-30">
                 {[...Array(10)].map((_, i) => (
                   <span
                     key={i}
@@ -213,7 +216,7 @@ export default function IdentityCheck() {
               {/* Glowing Horizontal Scanning Beam */}
               <div
                 ref={scanBeamRef}
-                className="absolute left-0 right-0 h-[2.5px] pointer-events-none z-30"
+                className="absolute left-0 right-0 h-[3px] pointer-events-none z-40"
                 style={{
                   background:
                     "linear-gradient(90deg, transparent 0%, #ffffff 30%, #3b82f6 50%, #ffffff 70%, transparent 100%)",
@@ -221,53 +224,6 @@ export default function IdentityCheck() {
                     "0 0 12px rgba(59, 130, 246, 0.9), 0 0 24px rgba(28, 58, 148, 0.7)",
                 }}
               />
-
-              {/* Badge Internal Face */}
-              <div className="flex items-center justify-between pb-2 border-b border-[rgba(27,24,21,0.08)]">
-                <span className="font-mono text-[9px] tracking-[0.18em] text-[#1b1815] uppercase font-medium">
-                  {content.hero.badge.brandMark}
-                </span>
-                <span className="font-mono text-[8px] tracking-[0.14em] text-[#726a60]">
-                  PASS #0001
-                </span>
-              </div>
-
-              {/* Photo representation in scanner */}
-              <div className="my-3 relative w-full h-[145px] sm:h-[175px] rounded-[10px] overflow-hidden bg-[#ebe5da] border border-white/80 shadow-inner flex items-center justify-center">
-                {content.hero.badge.photo ? (
-                  <img
-                    src={content.hero.badge.photo}
-                    alt={content.hero.badge.name}
-                    className="w-full h-full object-cover object-[center_16%]"
-                  />
-                ) : (
-                  <div className="flex flex-col items-center justify-center text-center p-3">
-                    <span className="font-mono text-[8.5px] tracking-[0.16em] uppercase text-[#5d564e]">
-                      {content.hero.badge.name}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              <div className="text-left mt-2">
-                <h4 className="font-serif text-lg sm:text-xl font-light text-[#1b1815] leading-tight">
-                  {content.hero.badge.name}
-                </h4>
-                <p className="font-mono text-[9px] tracking-[0.18em] text-[#1c3a94] uppercase font-medium mt-0.5">
-                  {content.hero.badge.role}
-                </p>
-              </div>
-
-              {/* Status and verification code */}
-              <div className="mt-3 pt-2.5 border-t border-[rgba(27,24,21,0.08)] flex items-center justify-between">
-                <span className="font-mono text-[8px] tracking-[0.14em] text-[#4a9f6e] uppercase flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#4a9f6e] inline-block animate-pulse" />
-                  {isVerified ? "SECURE ENCLAVE" : "SCANNING FEED"}
-                </span>
-                <span className="font-mono text-[8px] tracking-[0.14em] text-[#726a60]">
-                  UID: 9842-88
-                </span>
-              </div>
             </div>
 
             {/* Bottom Corner Labels & Progress Counter */}
