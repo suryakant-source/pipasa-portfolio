@@ -84,6 +84,19 @@ export default function SelectedWork() {
   const cardsCount = content.work.items.length;
   const radius = 560; // 3D ring orbit radius
 
+  const handleSelectIndex = (index: number) => {
+    setActiveIndex(index);
+    if (ringRef.current && window.innerWidth >= 1024) {
+      const angleStep = 360 / cardsCount;
+      const targetRotationY = -index * angleStep;
+      gsap.to(ringRef.current, {
+        rotationY: targetRotationY,
+        duration: 0.65,
+        ease: "power2.out",
+      });
+    }
+  };
+
   return (
     <section
       ref={containerRef}
@@ -145,7 +158,13 @@ export default function SelectedWork() {
               return (
                 <div
                   key={item.id}
-                  onClick={() => setSelectedModalItem(item)}
+                  onClick={() => {
+                    if (isActive) {
+                      setSelectedModalItem(item);
+                    } else {
+                      handleSelectIndex(index);
+                    }
+                  }}
                   onMouseMove={isActive ? handleMouseMove : undefined}
                   className={`absolute top-0 left-0 w-full h-full rounded-[22px] p-8 md:p-10 cursor-pointer overflow-hidden transition-all duration-500 ease-out select-none border border-white/80 shadow-[0_20px_45px_rgba(27,24,21,0.1)] ${
                     isActive ? "opacity-100 filter-none" : "opacity-65 blur-[1.5px]"
@@ -321,7 +340,7 @@ export default function SelectedWork() {
             {content.work.items.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setActiveIndex(i)}
+                onClick={() => handleSelectIndex(i)}
                 aria-label={`Go to reel ${i + 1}`}
                 className={`transition-all duration-300 rounded-full ${
                   i === activeIndex

@@ -14,8 +14,13 @@ export default function Hero({ isLoaded }: HeroProps) {
     if (isLoaded) {
       const timer = setTimeout(() => {
         setRevealed(true);
-      }, 150);
+      }, 100);
       return () => clearTimeout(timer);
+    } else {
+      const fallbackTimer = setTimeout(() => {
+        setRevealed(true);
+      }, 2900);
+      return () => clearTimeout(fallbackTimer);
     }
   }, [isLoaded]);
 

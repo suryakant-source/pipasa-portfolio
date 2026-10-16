@@ -184,21 +184,13 @@
   animation: scrollSlide 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-/* Reduced motion overrides */
+/* Respect prefers-reduced-motion: disable infinite sways and complex transforms, keep clean gentle fades */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
+  .animate-leaf-sway,
   .animate-lanyard,
   .animate-clip-rock,
-  .animate-status-ring,
   .animate-scroll-bar {
     animation: none !important;
   }
 }
+

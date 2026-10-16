@@ -11,6 +11,7 @@ import Contact from "@/components/Contact";
 import BackgroundRoom from "@/components/BackgroundRoom";
 import SmoothScroll from "@/components/SmoothScroll";
 import InteractiveLanyardBadge from "@/components/InteractiveLanyardBadge";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -19,7 +20,14 @@ export default function Home() {
     <SmoothScroll>
       <div className="relative min-h-screen w-full bg-[#f4f1eb] text-[#1b1815] selection:bg-[#1c3a94] selection:text-white">
         {/* Full-Screen Script Reveal Loader */}
-        <Loader onComplete={() => setIsLoaded(true)} />
+        <Loader
+          onComplete={() => {
+            setIsLoaded(true);
+            try {
+              ScrollTrigger.refresh();
+            } catch {}
+          }}
+        />
 
         {/* Fixed Background Room: Window Light, Leaf Shadow, Concentric Arcs, Noise */}
         <BackgroundRoom />

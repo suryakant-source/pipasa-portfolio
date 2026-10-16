@@ -27,12 +27,6 @@ export default function IdentityCheck() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    if (prefersReducedMotion) {
-      setScanProgress(100);
-      setIsVerified(true);
-      return;
-    }
-
     const ctx = gsap.context(() => {
       // Main Scrubbed Timeline pinned for 2500px of scroll
       const tl = gsap.timeline({
@@ -42,7 +36,7 @@ export default function IdentityCheck() {
           start: "top top",
           end: "+=2500",
           pin: true,
-          scrub: 0.6,
+          scrub: prefersReducedMotion ? 0.2 : 0.6,
           onUpdate: (self) => {
             const p = self.progress;
             // Scan beam progress 0 -> 100% between 0.28 and 0.65 of timeline

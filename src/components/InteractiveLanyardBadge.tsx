@@ -63,6 +63,7 @@ export default function InteractiveLanyardBadge() {
 
   // Rope simulation nodes
   const nodesRef = useRef<RopeNode[]>([]);
+  const startTimeRef = useRef<number>(0);
   const [activeSection, setActiveSection] = useState<
     "hero" | "about" | "work" | "contact"
   >("hero");
@@ -204,6 +205,7 @@ export default function InteractiveLanyardBadge() {
     const initialX = width > 1024 ? width * 0.72 : width * 0.5;
     const initialY = width > 1024 ? window.innerHeight * 0.44 : 220;
 
+    startTimeRef.current = performance.now();
     initRope(initialX, initialY);
     currentPosRef.current = {
       x: initialX,
@@ -241,7 +243,7 @@ export default function InteractiveLanyardBadge() {
     // 3D Pointer tilt listener
     const handlePointerMove = (e: PointerEvent) => {
       const badge = badgeRef.current;
-      if (!badge || window.innerWidth < 1024) return;
+      if (!badge || window.innerWidth < 768) return;
       const rect = badge.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
@@ -272,7 +274,28 @@ export default function InteractiveLanyardBadge() {
       const width = window.innerWidth;
       const isMobile = width < 1024;
 
-      // 1. Spring physics for drag offset
+      const now = performance.now();
+      const elapsed = startTimeRef.current > 0 ? (now - startTimeRef.current) / 1000 : 0;
+
+      // 1. Damped pendulum drop oscillation on load (~1.5s)
+      const dropOscillation = prefersReducedMotion || elapsed > 2.2
+        ? 0
+        : Math.sin(elapsed * 7.2) * Math.exp(-elapsed * 2.2) * 8.5;
+
+      // 2. Idle lanyard sway (9s cycle, +-1.6deg)
+      const idleSway = prefersReducedMotion || target.section !== "hero"
+        ? 0
+        : Math.sin((elapsed * 2 * Math.PI) / 9) * 1.6;
+
+      // 3. Swivel clip rock (3.1s cycle, +-5deg)
+      const clipRock = prefersReducedMotion || target.section !== "hero"
+        ? 0
+        : Math.sin((elapsed * 2 * Math.PI) / 3.1) * 5.0;
+
+      // 4. Pointer motion reaction
+      const pointerSwing = prefersReducedMotion ? 0 : tilt.y * 0.35;
+
+      // 5. Spring physics for drag offset
       if (!drag.isDragging) {
         const springK = 0.08;
         const damping = 0.84;
@@ -287,27 +310,34 @@ export default function InteractiveLanyardBadge() {
         drag.offsetY += drag.vy;
       }
 
-      // 2. Smoothly interpolate position towards target + drag offset
+      // 6. Smoothly interpolate position towards target + drag offset
       const lerpFactor = prefersReducedMotion ? 0.35 : isMobile ? 0.16 : 0.14;
       current.x += (target.x + drag.offsetX - current.x) * lerpFactor;
       current.y += (target.y + drag.offsetY - current.y) * lerpFactor;
       current.scale += (target.scale - current.scale) * lerpFactor;
       current.ropeAlpha += (target.ropeAlpha - current.ropeAlpha) * lerpFactor;
 
-      // 3. Smooth tilt
+      // 7. Smooth tilt
       tilt.x += (tilt.targetX - tilt.x) * 0.12;
       tilt.y += (tilt.targetY - tilt.y) * 0.12;
 
-      // 4. Calculate card swing from horizontal velocity & drag displacement
+      // 8. Calculate dynamic card swing from velocity & displacement
       const targetSwing = prefersReducedMotion
         ? 0
         : Math.max(-18, Math.min(18, drag.offsetX * 0.08 + drag.vx * 1.2));
       current.swingAngle += (targetSwing - current.swingAngle) * 0.1;
 
-      // 5. Update Rope Physics (Verlet Simulation)
-      const nodes = nodesRef.current;
-      const totalRot = target.rotation + current.swingAngle;
+      // Combined total rotation angle
+      const totalRot =
+        target.rotation +
+        dropOscillation +
+        idleSway +
+        pointerSwing +
+        current.swingAngle;
       const rotRad = (totalRot * Math.PI) / 180;
+
+      // 9. Update Rope Physics (Verlet Simulation)
+      const nodes = nodesRef.current;
       const halfHeight =
         target.section === "contact" ? 230 : width < 640 ? 175 : 220;
 
@@ -344,7 +374,7 @@ export default function InteractiveLanyardBadge() {
           n.y += vy;
         }
 
-        // Distance constraint relaxation (fewer iterations on mobile for speed)
+        // Distance constraint relaxation
         const ropeTotalLength = Math.max(80, badgeClipY - topAnchorY);
         const segmentLen = ropeTotalLength / (nodes.length - 1);
         const relaxIter = isMobile ? 4 : 7;
@@ -377,7 +407,7 @@ export default function InteractiveLanyardBadge() {
         }
       }
 
-      // 6. Draw Canvas Rope
+      // 10. Draw Canvas Rope
       const canvas = canvasRef.current;
       if (canvas) {
         if (
@@ -411,19 +441,19 @@ export default function InteractiveLanyardBadge() {
             ctx.lineTo(nodes[nodes.length - 1].x, nodes[nodes.length - 1].y);
 
             // Outer subtle drop shadow
-            ctx.strokeStyle = "rgba(27, 24, 21, 0.12)";
-            ctx.lineWidth = 4.8 * current.scale;
+            ctx.strokeStyle = "rgba(27, 24, 21, 0.16)";
+            ctx.lineWidth = 5.2 * current.scale;
             ctx.lineCap = "round";
             ctx.lineJoin = "round";
             ctx.stroke();
 
-            // Clean crisp white braided cord (thin white lanyard)
-            ctx.strokeStyle = "rgba(255, 255, 255, 0.96)";
+            // Clean crisp white braided cord
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.98)";
             ctx.lineWidth = 3.6 * current.scale;
             ctx.stroke();
 
-            // Inner faint thread highlight
-            ctx.strokeStyle = "rgba(240, 238, 234, 0.65)";
+            // Inner faint woven thread line
+            ctx.strokeStyle = "rgba(230, 224, 212, 0.75)";
             ctx.lineWidth = 1.2 * current.scale;
             ctx.stroke();
 
@@ -431,20 +461,21 @@ export default function InteractiveLanyardBadge() {
             const clip = nodes[nodes.length - 1];
             ctx.save();
             ctx.translate(clip.x, clip.y);
-            ctx.rotate(rotRad);
+            const claspRockRad = rotRad + ((clipRock * Math.PI) / 180);
+            ctx.rotate(claspRockRad);
 
             // Ring
             ctx.beginPath();
             ctx.arc(0, 5 * current.scale, 5.5 * current.scale, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+            ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
             ctx.fill();
             ctx.strokeStyle = "#8c857b";
             ctx.lineWidth = 1.6 * current.scale;
             ctx.stroke();
 
             // Buckle rectangle
-            ctx.fillStyle = "#e4e1db";
-            ctx.strokeStyle = "#726a60";
+            ctx.fillStyle = "#e8e5df";
+            ctx.strokeStyle = "#5d564e";
             ctx.lineWidth = 1.4 * current.scale;
             ctx.fillRect(
               -6 * current.scale,
@@ -464,7 +495,7 @@ export default function InteractiveLanyardBadge() {
         }
       }
 
-      // 7. Update DOM Badge transform & scroll visibility
+      // 11. Update DOM Badge transform & scroll visibility
       const badge = badgeRef.current;
       if (badge) {
         const st = ScrollTrigger.getById("identity-check");

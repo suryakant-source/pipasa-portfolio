@@ -15,55 +15,44 @@ export default function Loader({ onComplete }: LoaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 1. Session Storage check: play once per session
-    try {
-      const hasSeen = sessionStorage.getItem("pipasa_portfolio_loader_seen");
-      if (hasSeen) {
-        setAnimStage("done");
-        onComplete();
-        return;
-      }
-    } catch {
-      // Ignore in restricted environments
-    }
-
-    // 2. Reduced motion check
+    // Check prefers-reduced-motion
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
     setReducedMotion(prefersReduced);
 
     if (prefersReduced) {
-      try {
-        sessionStorage.setItem("pipasa_portfolio_loader_seen", "true");
-      } catch {}
-      const timer = setTimeout(() => {
+      setAnimStage("init");
+      const exitTimer = setTimeout(() => {
+        setAnimStage("exiting");
+      }, 700);
+      const doneTimer = setTimeout(() => {
         setAnimStage("done");
         onComplete();
-      }, 450);
-      return () => clearTimeout(timer);
+      }, 1200);
+      return () => {
+        clearTimeout(exitTimer);
+        clearTimeout(doneTimer);
+      };
     }
 
     setAnimStage("init");
 
-    // Start script reveal sequence
+    // 1. Script "handwritten" reveal starts at ~100ms
     const startTimer = setTimeout(() => {
       setAnimStage("animating");
-    }, 60);
+    }, 100);
 
-    // Slide up sheet wipe exit at ~2.2s
+    // 2. Sheet wipe slides up at 2.1s
     const exitTimer = setTimeout(() => {
       setAnimStage("exiting");
-      try {
-        sessionStorage.setItem("pipasa_portfolio_loader_seen", "true");
-      } catch {}
-    }, 2200);
+    }, 2100);
 
-    // Completely finish after sheet wipe finishes
+    // 3. Complete and unmount loader at 3.0s, notifying parent
     const doneTimer = setTimeout(() => {
       setAnimStage("done");
       onComplete();
-    }, 3150);
+    }, 3000);
 
     return () => {
       clearTimeout(startTimer);
