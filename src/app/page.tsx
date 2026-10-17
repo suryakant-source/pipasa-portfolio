@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -16,18 +16,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const handleLoaderComplete = useCallback(() => {
+    setIsLoaded(true);
+    try {
+      ScrollTrigger.refresh();
+    } catch {}
+  }, []);
+
   return (
     <SmoothScroll>
       <div className="relative min-h-screen w-full bg-[#f4f1eb] text-[#1b1815] selection:bg-[#1c3a94] selection:text-white">
         {/* Full-Screen Script Reveal Loader */}
-        <Loader
-          onComplete={() => {
-            setIsLoaded(true);
-            try {
-              ScrollTrigger.refresh();
-            } catch {}
-          }}
-        />
+        <Loader onComplete={handleLoaderComplete} />
 
         {/* Fixed Background Room: Window Light, Leaf Shadow, Concentric Arcs, Noise */}
         <BackgroundRoom />

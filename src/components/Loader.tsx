@@ -13,8 +13,14 @@ export default function Loader({ onComplete }: LoaderProps) {
   >("check");
   const [reducedMotion, setReducedMotion] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+  const hasStartedRef = useRef(false);
 
   useEffect(() => {
+    if (hasStartedRef.current) return;
+    hasStartedRef.current = true;
+
     // Check prefers-reduced-motion
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -25,11 +31,11 @@ export default function Loader({ onComplete }: LoaderProps) {
       setAnimStage("init");
       const exitTimer = setTimeout(() => {
         setAnimStage("exiting");
-      }, 700);
+      }, 600);
       const doneTimer = setTimeout(() => {
         setAnimStage("done");
-        onComplete();
-      }, 1200);
+        onCompleteRef.current?.();
+      }, 1000);
       return () => {
         clearTimeout(exitTimer);
         clearTimeout(doneTimer);
@@ -43,23 +49,23 @@ export default function Loader({ onComplete }: LoaderProps) {
       setAnimStage("animating");
     }, 100);
 
-    // 2. Sheet wipe slides up at 2.1s
+    // 2. Sheet wipe slides up at 2.0s
     const exitTimer = setTimeout(() => {
       setAnimStage("exiting");
-    }, 2100);
+    }, 2000);
 
-    // 3. Complete and unmount loader at 3.0s, notifying parent
+    // 3. Complete and unmount loader at 2.9s, notifying parent once
     const doneTimer = setTimeout(() => {
       setAnimStage("done");
-      onComplete();
-    }, 3000);
+      onCompleteRef.current?.();
+    }, 2900);
 
     return () => {
       clearTimeout(startTimer);
       clearTimeout(exitTimer);
       clearTimeout(doneTimer);
     };
-  }, [onComplete]);
+  }, []);
 
   if (animStage === "done" || animStage === "check") {
     return null;
